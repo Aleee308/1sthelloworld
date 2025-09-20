@@ -1,0 +1,245 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Weekly Timetable Routine</title>
+  <style>
+    :root{
+      --bg1:#74ebd5; --bg2:#ACB6E5; --ink:#1f2937; --muted:#6b7280; --card:#ffffff;
+      --brand:#0ea5e9; --brand-ink:#ffffff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+      color:var(--ink);
+      background:linear-gradient(120deg,var(--bg1),var(--bg2)) fixed;
+      min-height:100vh; display:flex; flex-direction:column; align-items:center;
+    }
+    header{
+      width:100%; padding:28px 16px; text-align:center; color:#fff;
+      background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.15));
+      backdrop-filter:saturate(140%) blur(3px);
+    }
+    header h1{margin:0 0 6px;font-size:clamp(1.4rem,2.5vw,2.2rem)}
+    header p{margin:0;opacity:.9}
+
+    .wrap{width:min(1000px,92%); margin:18px auto 36px;}
+    .days{
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+      background:rgba(255,255,255,.45); padding:12px; border-radius:16px;
+      box-shadow:0 8px 24px rgba(0,0,0,.08);
+    }
+    .day-btn{
+      border:0; padding:10px 14px; border-radius:12px; cursor:pointer;
+      background:#fff; color:var(--ink); font-weight:600;
+      box-shadow:0 2px 8px rgba(0,0,0,.08); transition:.25s transform,.25s box-shadow,.25s background,.25s color;
+    }
+    .day-btn:hover{transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,.12)}
+    .day-btn.active{background:var(--brand); color:var(--brand-ink)}
+
+    .content{
+      display:none; margin-top:16px; background:var(--card); border-radius:16px;
+      padding:20px; box-shadow:0 10px 28px rgba(0,0,0,.12);
+      animation:fade .35s ease-out;
+    }
+    .content h2{margin:0 0 10px}
+    .meta{color:var(--muted); margin:-2px 0 14px}
+    .legend{display:flex; flex-wrap:wrap; gap:10px; margin:8px 0 12px}
+    .pill{padding:6px 10px; border-radius:999px; font-size:.85rem; background:#f3f4f6; color:#111827}
+    .schedule{
+      overflow:auto; border-radius:12px; border:1px solid #e5e7eb;
+    }
+    table{width:100%; border-collapse:collapse; min-width:680px}
+    thead th{
+      position:sticky; top:0; background:#f9fafb; text-align:left; font-size:.9rem;
+      padding:12px; border-bottom:1px solid #e5e7eb;
+    }
+    tbody td{padding:12px; border-bottom:1px solid #f1f5f9; vertical-align:top}
+    tbody tr:hover{background:#fafafa}
+    .tag{display:inline-block; padding:4px 8px; border-radius:8px; font-size:.78rem; background:#e0f2fe}
+    @keyframes fade{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:translateY(0)}}
+
+    @media (max-width:640px){
+      .day-btn{flex:1 1 calc(50% - 10px)}
+      thead{display:none}
+      table, tbody, tr, td{display:block; width:100%}
+      tbody tr{border-bottom:1px solid #eee}
+      tbody td{border:0; padding:10px 12px}
+      tbody td::before{
+        content:attr(data-label); font-weight:700; display:block; margin-bottom:4px; color:#374151
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📅 Weekly Timetable — Study • Exercise • Food • Wellness</h1>
+    <p>This is my Routine based timetable that I following...</p>
+  </header>
+
+  <main class="wrap">
+    <div class="days" role="tablist" aria-label="Select a day">
+      <button class="day-btn" data-day="monday"    role="tab" aria-selected="false">Monday</button>
+      <button class="day-btn" data-day="tuesday"   role="tab" aria-selected="false">Tuesday</button>
+      <button class="day-btn" data-day="wednesday" role="tab" aria-selected="false">Wednesday</button>
+      <button class="day-btn" data-day="thursday"  role="tab" aria-selected="false">Thursday</button>
+      <button class="day-btn" data-day="friday"    role="tab" aria-selected="false">Friday</button>
+      <button class="day-btn" data-day="saturday"  role="tab" aria-selected="false">Saturday</button>
+      <button class="day-btn" data-day="sunday"    role="tab" aria-selected="false">Sunday</button>
+    </div>
+
+    <section id="monday" class="content" role="tabpanel" aria-labelledby="monday-tab">
+      <h2>📘 Monday — Focus on DSA</h2>
+      <p class="meta">Kickstart the week with Data Structures & disciplined habits.</p>
+      <div class="legend">
+        <span class="pill">Study</span><span class="pill">Exercise</span><span class="pill">Food</span><span class="pill">Wellness</span>
+      </div>
+      <div class="schedule">
+        <table>
+          <thead><tr><th>Time</th><th>Study</th><th>Exercise</th><th>Food</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td data-label="Time">6:30–7:00</td><td data-label="Study">Plan tasks</td><td data-label="Exercise">Walk + stretch</td><td data-label="Food">Warm water</td><td data-label="Notes"><span class="tag">Light start</span></td></tr>
+            <tr><td data-label="Time">7:30–8:00</td><td data-label="Study">—</td><td data-label="Exercise">—</td><td data-label="Food">Eggs + roti + fruit</td><td data-label="Notes">Protein + fiber</td></tr>
+            <tr><td data-label="Time">9:00–12:00</td><td data-label="Study">Arrays / Linked Lists + practice</td><td data-label="Exercise">—</td><td data-label="Food">Water every hour</td><td data-label="Notes">Pomodoro 50/10</td></tr>
+            <tr><td data-label="Time">13:00–14:00</td><td data-label="Study">—</td><td data-label="Exercise">10-min walk</td><td data-label="Food">Lunch: daal + rice + salad</td><td data-label="Notes">No screens</td></tr>
+            <tr><td data-label="Time">15:00–17:00</td><td data-label="Study">LeetCode Easy → Medium</td><td data-label="Exercise">—</td><td data-label="Food">Snack: nuts + water</td><td data-label="Notes">Track attempts</td></tr>
+            <tr><td data-label="Time">18:15–19:00</td><td data-label="Study">—</td><td data-label="Exercise">Evening walk</td><td data-label="Food">—</td><td data-label="Notes">Fresh air</td></tr>
+            <tr><td data-label="Time">20:00–21:00</td><td data-label="Study">Revise notes</td><td data-label="Exercise">—</td><td data-label="Food">Dinner: chicken + veg</td><td data-label="Notes">Plan Tuesday</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="tuesday" class="content" role="tabpanel">
+      <h2>📗 Tuesday — Databases + Web</h2>
+      <p class="meta">Balance SQL concepts with frontend practice.</p>
+      <div class="schedule">
+        <table>
+          <thead><tr><th>Time</th><th>Study</th><th>Exercise</th><th>Food</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td data-label="Time">6:30–7:00</td><td data-label="Study">Breathing + plan</td><td data-label="Exercise">Yoga</td><td data-label="Food">Water + dates</td><td data-label="Notes">Mindful start</td></tr>
+            <tr><td data-label="Time">9:00–11:30</td><td data-label="Study">ER modeling + SQL Joins</td><td data-label="Exercise">—</td><td data-label="Food">Hydrate</td><td data-label="Notes">Practice queries</td></tr>
+            <tr><td data-label="Time">12:30–13:15</td><td data-label="Study">—</td><td data-label="Exercise">Walk</td><td data-label="Food">Lunch: sabzi + chapati</td><td data-label="Notes">Short scroll only</td></tr>
+            <tr><td data-label="Time">15:00–17:00</td><td data-label="Study">HTML/CSS layout mini-project</td><td data-label="Exercise">—</td><td data-label="Food">Snack: yogurt</td><td data-label="Notes"><span class="tag">Project</span></td></tr>
+            <tr><td data-label="Time">20:00–21:00</td><td data-label="Study">Read tech blog</td><td data-label="Exercise">—</td><td data-label="Food">Dinner: fish/daal + salad</td><td data-label="Notes">Sleep by 11</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="wednesday" class="content" role="tabpanel">
+      <h2>📙 Wednesday — Operating Systems</h2>
+      <p class="meta">Processes, threads, scheduling.</p>
+      <div class="schedule">
+        <table>
+          <thead><tr><th>Time</th><th>Study</th><th>Exercise</th><th>Food</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td data-label="Time">6:30–7:00</td><td data-label="Study">Review notes</td><td data-label="Exercise">Push-ups + stretch</td><td data-label="Food">Banana + milk</td><td data-label="Notes">Energy boost</td></tr>
+            <tr><td data-label="Time">9:00–12:00</td><td data-label="Study">CPU scheduling problems</td><td data-label="Exercise">—</td><td data-label="Food">Water</td><td data-label="Notes">Solve numericals</td></tr>
+            <tr><td data-label="Time">15:00–17:00</td><td data-label="Study">Mini notes + flashcards</td><td data-label="Exercise">—</td><td data-label="Food">Snack: apple + peanuts</td><td data-label="Notes">Recall</td></tr>
+            <tr><td data-label="Time">18:30–19:00</td><td data-label="Study">—</td><td data-label="Exercise">Walk</td><td data-label="Food">—</td><td data-label="Notes">Unwind</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="thursday" class="content" role="tabpanel">
+      <h2>📒 Thursday — OOP / Java</h2>
+      <p class="meta">Classes, interfaces, exceptions, collections.</p>
+      <div class="schedule">
+        <table>
+          <thead><tr><th>Time</th><th>Study</th><th>Exercise</th><th>Food</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td data-label="Time">6:45–7:15</td><td data-label="Study">Plan + quick quiz</td><td data-label="Exercise">Mobility</td><td data-label="Food">Warm water + nuts</td><td data-label="Notes">Focus</td></tr>
+            <tr><td data-label="Time">9:00–11:30</td><td data-label="Study">Interfaces & Collections API</td><td data-label="Exercise">—</td><td data-label="Food">Hydrate</td><td data-label="Notes"><span class="tag">Code</span></td></tr>
+            <tr><td data-label="Time">13:00–13:45</td><td data-label="Study">—</td><td data-label="Exercise">Walk stairs</td><td data-label="Food">Lunch: khichdi + salad</td><td data-label="Notes">Light</td></tr>
+            <tr><td data-label="Time">15:30–17:30</td><td data-label="Study">Small Java project (CRUD)</td><td data-label="Exercise">—</td><td data-label="Food">Snack: lassi</td><td data-label="Notes">Git commit</td></tr>
+            <tr><td data-label="Time">20:00–20:45</td><td data-label="Study">Review & plan</td><td data-label="Exercise">—</td><td data-label="Food">Dinner: veg + chapati</td><td data-label="Notes">Sleep 7–8h</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="friday" class="content" role="tabpanel">
+      <h2>📕 Friday — Web Dev (JS)</h2>
+      <p class="meta">DOM, events, fetch, small UI components.</p>
+      <div class="schedule">
+        <table>
+          <thead><tr><th>Time</th><th>Study</th><th>Exercise</th><th>Food</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td data-label="Time">6:30–7:00</td><td data-label="Study">Task list</td><td data-label="Exercise">Stretch</td><td data-label="Food">Water + dates</td><td data-label="Notes">Short plan</td></tr>
+            <tr><td data-label="Time">9:00–12:00</td><td data-label="Study">JS DOM + events mini-apps</td><td data-label="Exercise">—</td><td data-label="Food">Hydrate</td><td data-label="Notes"><span class="tag">Hands-on</span></td></tr>
+            <tr><td data-label="Time">13:15–13:45</td><td data-label="Study">—</td><td data-label="Exercise">Walk + sunlight</td><td data-label="Food">Lunch: daal + roti</td><td data-label="Notes">Vitamin D</td></tr>
+            <tr><td data-label="Time">15:00–17:00</td><td data-label="Study">Fetch API + JSON</td><td data-label="Exercise">—</td><td data-label="Food">Snack: yogurt</td><td data-label="Notes">Note errors</td></tr>
+            <tr><td data-label="Time">19:30–20:15</td><td data-label="Study">Weekly recap</td><td data-label="Exercise">Leisure walk</td><td data-label="Food">Dinner: rice + curry</td><td data-label="Notes">Gratitude 3 lines</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="saturday" class="content" role="tabpanel">
+      <h2>📓 Saturday — Project & Career</h2>
+      <p class="meta">Build portfolio + resume/LinkedIn polish.</p>
+      <div class="schedule">
+        <table>
+          <thead><tr><th>Time</th><th>Study / Project</th><th>Exercise</th><th>Food</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td data-label="Time">7:30–8:00</td><td data-label="Study / Project">Plan sprint</td><td data-label="Exercise">Walk</td><td data-label="Food">Paratha + omelette (light oil)</td><td data-label="Notes">Prioritize</td></tr>
+            <tr><td data-label="Time">10:00–13:00</td><td data-label="Study / Project">Feature build + Git</td><td data-label="Exercise">—</td><td data-label="Food">Hydrate</td><td data-label="Notes">Commit often</td></tr>
+            <tr><td data-label="Time">15:30–17:00</td><td data-label="Study / Project">Resume + LinkedIn</td><td data-label="Exercise">—</td><td data-label="Food">Snack: fruit</td><td data-label="Notes">Add projects</td></tr>
+            <tr><td data-label="Time">19:00–20:00</td><td data-label="Study / Project">Mock interview</td><td data-label="Exercise">—</td><td data-label="Food">Dinner: protein + veg</td><td data-label="Notes">STAR method</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="sunday" class="content" role="tabpanel">
+      <h2>🧘 Sunday — Reset & Family</h2>
+      <p class="meta">Rest, reflect, plan the next week.</p>
+      <div class="schedule">
+        <table>
+          <thead><tr><th>Time</th><th>Activity</th><th>Exercise</th><th>Food</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td data-label="Time">8:00–9:00</td><td data-label="Activity">Room cleanup + laundry</td><td data-label="Exercise">Light stretch</td><td data-label="Food">Brunch with family</td><td data-label="Notes">Gratitude</td></tr>
+            <tr><td data-label="Time">12:00–13:00</td><td data-label="Activity">Hobby / reading</td><td data-label="Exercise">—</td><td data-label="Food">Hydrate</td><td data-label="Notes">No heavy study</td></tr>
+            <tr><td data-label="Time">18:00–19:00</td><td data-label="Activity">Plan next week</td><td data-label="Exercise">Walk</td><td data-label="Food">—</td><td data-label="Notes">Set 3 goals</td></tr>
+            <tr><td data-label="Time">21:30</td><td data-label="Activity">Early sleep</td><td data-label="Exercise">—</td><td data-label="Food">Light dinner</td><td data-label="Notes">Phones away</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function showDay(day){
+      document.querySelectorAll('.content').forEach(c => c.style.display = 'none');
+      const active = document.getElementById(day);
+      if(active){ active.style.display = 'block'; }
+
+      document.querySelectorAll('.day-btn').forEach(b=>{
+        const isActive = b.dataset.day === day;
+        b.classList.toggle('active', isActive);
+        b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      history.replaceState(null, '', '#' + day);
+    }
+
+    document.querySelectorAll('.day-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=> showDay(btn.dataset.day));
+    });
+
+    (function init(){
+      const map = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+      const hash = (location.hash || '').replace('#','').toLowerCase();
+      const today = map[new Date().getDay()];
+      const start = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'].includes(hash)
+        ? hash : today || 'monday';
+      showDay(start === 'sunday' ? 'monday' : start); 
+    })();
+  </script>
+</body>
+</html>
+
